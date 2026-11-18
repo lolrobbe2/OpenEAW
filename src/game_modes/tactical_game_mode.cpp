@@ -158,7 +158,7 @@ TacticalGameMode::TacticalGameMode(const GameContext& context, const GameData& g
     , m_scene(create_scene("_MP_SPACE_ALDERAAN", context.asset_loader, context.asset_cache,
                            game_data.game_object_types, m_rts_camera))
     , m_scene_renderer(context.renderer, get_render_pipeline(context.asset_cache, "Default"))
-    , m_commandbar(context.asset_loader)
+    , m_commandbar(context.asset_loader, context.asset_cache)
 {
     // First add the capture widget to the canvas. This will catch all mouse and key events that
     // aren't used by dialogs, etc.
@@ -192,7 +192,6 @@ void TacticalGameMode::render()
         m_scene_renderer.render_scene(*m_scene, m_camera);
     }
     context().renderer.clear(khepri::renderer::Renderer::clear_depth);
-
     // Now render the UI on top of the scene
     GameMode::render();
 }
